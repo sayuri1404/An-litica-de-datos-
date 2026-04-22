@@ -13,11 +13,11 @@ df = pd.read_csv(CSV_PATH)
 st.sidebar.header("Filtros")
 
 # Selector de año
-years = sorted(df["year"].unique())
+years = sorted(df["year_id"].unique())
 selected_year = st.sidebar.selectbox("Selecciona un año", years)
 
 # Selector de equipo
-teams = sorted(df["team"].unique())
+teams = sorted(df["team_id"].unique())
 selected_team = st.sidebar.selectbox("Selecciona un equipo", teams)
 
 # Selector de tipo de juegos
@@ -28,12 +28,12 @@ game_type = st.sidebar.pills(
 )
 
 # --- Filtrado de datos ---
-filtered_df = df[(df["year"] == selected_year) & (df["team"] == selected_team)]
+filtered_df = df[(df["year_id"] == selected_year) & (df["team_id"] == selected_team)].copy()
 
 if game_type == "Temporada regular":
-    filtered_df = filtered_df[filtered_df["game_type"] == "Regular"]
+    filtered_df = filtered_df[filtered_df["is_playoffs"] == 0]
 elif game_type == "Playoffs":
-    filtered_df = filtered_df[filtered_df["game_type"] == "Playoffs"]
+    filtered_df = filtered_df[filtered_df["is_playoffs"] == 1]
 
 # --- Gráficas de acumulado ---
 filtered_df["wins_cum"] = (filtered_df["game_result"] == "W").cumsum()
