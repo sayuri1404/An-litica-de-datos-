@@ -1,10 +1,13 @@
 # streamlit_app.py
+from pathlib import Path
+
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
 # --- Cargar dataset ---
-df = pd.read_csv("../datasets/nba_all_elo.csv")
+CSV_PATH = Path(__file__).parent / "datasets" / "nba_all_elo.csv"
+df = pd.read_csv(CSV_PATH)
 
 # --- Barra lateral ---
 st.sidebar.header("Filtros")
