@@ -30,7 +30,8 @@ selected_year = st.sidebar.selectbox(
     "Selecciona un año", years, index=len(years) - 1
 )
 
-teams = sorted(df["fran_id"].unique())
+# Sólo equipos que jugaron en el año seleccionado
+teams = sorted(df.loc[df["year_id"] == selected_year, "fran_id"].unique())
 selected_team = st.sidebar.selectbox("Selecciona un equipo", teams)
 
 game_type = st.sidebar.pills(
