@@ -30,7 +30,7 @@ selected_year = st.sidebar.selectbox(
     "Selecciona un año", years, index=len(years) - 1
 )
 
-teams = sorted(df["team_id"].unique())
+teams = sorted(df["fran_id"].unique())
 selected_team = st.sidebar.selectbox("Selecciona un equipo", teams)
 
 game_type = st.sidebar.pills(
@@ -41,7 +41,7 @@ game_type = st.sidebar.pills(
 
 # --- Filtrado de datos ---
 filtered_df = (
-    df[(df["year_id"] == selected_year) & (df["team_id"] == selected_team)]
+    df[(df["year_id"] == selected_year) & (df["fran_id"] == selected_team)]
     .sort_values("date_game")
     .reset_index(drop=True)
     .copy()
