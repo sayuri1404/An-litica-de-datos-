@@ -7,10 +7,15 @@
 # Para ejecutar:  streamlit run app.py
 # ============================================================
 
+from pathlib import Path
+
 import pandas as pd
 import plotly.express as px
 import plotly.io as pio
 import streamlit as st
+
+# Carpeta donde está este archivo (para que las rutas funcionen también en la nube)
+BASE_DIR = Path(__file__).parent
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard Cerveza Artesanal", layout="wide")
@@ -67,7 +72,7 @@ DICCIONARIO = pd.DataFrame({
 # Carga de datos (cacheada para que sea rápida)
 @st.cache_data
 def cargar_datos():
-    return pd.read_csv("datasets/df_limpio.csv")
+    return pd.read_csv(BASE_DIR / "datasets" / "df_limpio.csv")
 
 
 df = cargar_datos()
